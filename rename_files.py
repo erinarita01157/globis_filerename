@@ -1,6 +1,7 @@
 import csv
 import os
 import logging
+import re
 
 # Prompt the user for the folder path
 folder_path = input("フォルダのpathを入れてね。: ")
@@ -18,8 +19,16 @@ with open(folder_path + '/' + 'ReadMe.csv', 'r', encoding='cp932') as csvfile:
         try:
             old_name = row[2]  # assumes the file names are in the first column of the CSV file
             new_name = row[1]  # assumes the new names are in the second column of the CSV file
+            ## add day number change start ## 
+            pattern = '^[A-Z]{3}_(Day\d_)'
+            re_result = re.match(pattern, old_name)
+            prefix_day = ""
+            if None != re_result :
+                prefix_day = re_result.group(1)
+            ## add day number change end ##
             _, ext = os.path.splitext(old_name)
-            new_name_with_ext = new_name + ext
+            # add prefix and day number to new file name
+            new_name_with_ext = prefix_day + new_name + ext
             old_path = os.path.join(folder_path + '/', old_name)
             new_path = os.path.join(folder_path + '/', new_name_with_ext)
             try:
