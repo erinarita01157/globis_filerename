@@ -34,7 +34,7 @@ with open(folder_path + '/' + 'ReadMe.csv', 'r', encoding='cp932') as csvfile:
             try:
                 os.rename(old_path, new_path)
                 logging.info(f'名前を {old_name} から {new_name_with_ext}へ変更したよ。')
-            except FileNotFoundError:
+            except (FileNotFoundError, OSError) :
                 logging.warning(f'ファイルが見つからないよ。: {old_name}')
         except UnicodeDecodeError:
             continue  # skip rows that contain non-UTF-8 characters
