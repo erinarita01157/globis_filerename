@@ -2,9 +2,16 @@ import csv
 import os
 import logging
 import re
+import sys
 
-# Prompt the user for the folder path
-folder_path = input("フォルダのpathを入れてね。: ")
+#引数があれば、引数からファイルパスを指定する
+folder_path = ""
+if 1 < len(sys.argv):
+  folder_path = sys.argv[1]
+else:
+  # Prompt the user for the folder path
+  folder_path = input("フォルダのpathを入れてね。: ")
+print("指定されたフォルダは \"" + folder_path + "\" です。")
 
 # Set up logging
 logging.basicConfig(filename='renaming_log.txt', level=logging.INFO, format='%(asctime)s - %(message)s', filemode='w')
