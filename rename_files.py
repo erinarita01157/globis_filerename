@@ -6,7 +6,7 @@ import sys
 
 #引数があれば、引数からファイルパスを指定する
 folder_path = ""
-if 1 < len(sys.argv):
+if 2 == len(sys.argv):
   folder_path = sys.argv[1]
 else:
   # Prompt the user for the folder path
